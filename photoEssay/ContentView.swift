@@ -30,22 +30,20 @@ struct ContentView: View {
                 }
                 
                 Spacer()
-               
                 
-//                Button {
-//                    print("tapped")
-//                } label: {
-//                    Text("Change day time")
-//                    .frame(width: 280, height: 50)
-//                    .background(Color.white)
-//                    .font(.system(size : 20, weight: .bold, design: .default))
-//                    .cornerRadius(10)
-//
-//                }
+            Button("Change Day Time") {
+                print("tapped")
             }
+//            label: {
+//                WeatherButton(title: "Change Day Time", textColor: .blue,
+//                              backgroundColor: .white)
+//            }
         }
+        
     }
+    
 }
+
 
 
 struct ContentView_Previews: PreviewProvider {
@@ -127,5 +125,21 @@ struct MainWeather: View {
                                .foregroundColor(.white)
                        }
                        .padding(.bottom, 40)
+    }
+}
+
+struct WeatherButton : View {
+    
+    var title: String
+    var textColor: Color
+    var backgroundColor: Color
+    
+    var body: some View{
+        Text(title)
+            .frame(width: 280, height: 50)
+            .background(backgroundColor)
+            .foregroundColor(textColor)
+            .font(.system(size : 20, weight: .bold, design: .default))
+            .cornerRadius(10)
     }
 }
