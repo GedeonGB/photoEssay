@@ -10,14 +10,15 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var isNight = false
     
     var body: some View {
         
         ZStack {
            
-           BackgroundView(topColor: .blue, bottomColor: Color("lightBlue"))
+            BackgroundView(isNight: $isNight)
         
-            MainWeather (imageName: "cloud.sun.fill", temperature: 32)
+            WeatherToday (imageName: "cloud.sun.fill", temperature: 32)
                 
                 
                 HStack(spacing : 20) {
@@ -32,6 +33,8 @@ struct ContentView: View {
                 Spacer()
                 
             Button("Change Day Time") {
+                //the self shoud not be there but for error avoidance i just added it
+                self.isNight.toggle()
                 print("tapped")
             }
 //            label: {
@@ -82,13 +85,11 @@ struct WeatherDayView: View {
 
 struct BackgroundView: View {
     
-    var topColor: Color
-    var bottomColor: Color
-           
+    @Binding var isNight: Bool
+    
     var body: some View {
-        
-       
-        LinearGradient(gradient: Gradient(colors: [topColor,                            bottomColor]),
+        LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue,
+                                                   isNight ? .gray : Color("lightBlue")]),
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
             .edgesIgnoringSafeArea(.all)
@@ -106,27 +107,6 @@ struct CityTextView : View {
     }
 }
 
-struct MainWeather: View {
-   
-    var imageName : String
-    var temperature: Int
-    
-    var body: some View {
-                       
-                       VStack(spacing : 8) {
-                           Image(systemName: imageName)
-                               .renderingMode(.original)
-                               .resizable()
-                               .aspectRatio(contentMode: .fit)
-                               .frame(width : 150, height: 150)
-                           
-                           Text("\(temperature)°")
-                               .font(.system(size : 68, weight : .medium))
-                               .foregroundColor(.white)
-                       }
-                       .padding(.bottom, 40)
-    }
-}
 
 struct WeatherButton : View {
     
