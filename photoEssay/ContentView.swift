@@ -16,22 +16,10 @@ struct ContentView: View {
         ZStack {
            
            BackgroundView(topColor: .blue, bottomColor: Color("lightBlue"))
-           
-            VStack{
-                CityTextView(cityname: "Kinshasa, DRC")
+        
+            MainWeather (imageName: "cloud.sun.fill", temperature: 32)
                 
-                VStack(spacing : 8) {
-                    Image(systemName: "cloud.moon.rain.fill")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width : 150, height: 150)
-                    
-                    Text("30°")
-                        .font(.system(size : 68, weight : .medium))
-                        .foregroundColor(.white)
-                }
-                .padding(.bottom, 40)
+                
                 HStack(spacing : 20) {
                     WeatherDayView(dayOfTheWeek: "TUE", ImageName: "cloud.moon.rain.fill", Temp: 32)
                     WeatherDayView(dayOfTheWeek: "WED", ImageName: "cloud.rain.fill", Temp: 30)
@@ -117,5 +105,27 @@ struct CityTextView : View {
         .font(.system(size : 29, weight : .medium, design : .default))
         .foregroundColor(.white)
         .padding()
+    }
+}
+
+struct MainWeather: View {
+   
+    var imageName : String
+    var temperature: Int
+    
+    var body: some View {
+                       
+                       VStack(spacing : 8) {
+                           Image(systemName: imageName)
+                               .renderingMode(.original)
+                               .resizable()
+                               .aspectRatio(contentMode: .fit)
+                               .frame(width : 150, height: 150)
+                           
+                           Text("\(temperature)°")
+                               .font(.system(size : 68, weight : .medium))
+                               .foregroundColor(.white)
+                       }
+                       .padding(.bottom, 40)
     }
 }
